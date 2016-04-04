@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by Andrey on 31.03.2016.
  */
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    static final int images[] = {R.drawable.ras1,R.drawable.ras2,R.drawable.ras3};
+    static final int images[] = {R.drawable.ras1,R.drawable.ras2,R.drawable.ras3,R.drawable.ras4,R.drawable.ras5,R.drawable.ras6,R.drawable.ras6,R.drawable.ras8,R.drawable.ras9};
     Context context;
     public Adapter(Context context) {
         this.context = context;
@@ -38,7 +40,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.image.setImageDrawable(ContextCompat.getDrawable(context, images[position]));
+        int pic = images[position];
+
+        Picasso.with(holder.image.getContext()).load(pic).fit().into(holder.image);
 
     }
 
