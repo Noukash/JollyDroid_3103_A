@@ -12,16 +12,31 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Andrey on 31.03.2016.
  */
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+    static final int images[] = {R.drawable.ras1, R.drawable.ras2, R.drawable.ras3, R.drawable.ras4, R.drawable.ras5, R.drawable.ras6, R.drawable.ras6, R.drawable.ras8, R.drawable.ras9,};
 
-    static final int images[] = {R.drawable.ras1,R.drawable.ras2,R.drawable.ras3,R.drawable.ras4,R.drawable.ras5,R.drawable.ras6,R.drawable.ras6,R.drawable.ras8,R.drawable.ras9};
     Context context;
+    Item item;
+    List<Item> ListItem;
+
     public Adapter(Context context) {
         this.context = context;
+        if(ListItem==null) {
+            ListItem = new ArrayList<>();
+            for (int image:images) {
+                ListItem.add(new Item(image, context));
+
+            }
+        }
+
     }
 
 
@@ -35,14 +50,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
 
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        int pic = images[position];
-
-        Picasso.with(holder.image.getContext()).load(pic).fit().into(holder.image);
+        item=ListItem.get(position);
+       holder.MyView.setImages(item.image, item.width, item.height);
 
     }
 
@@ -50,16 +65,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return ListItem.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView image;
+        public MyView MyView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.MyImage);
+            MyView=(MyView)itemView.findViewById(R.id.MyView);
 
         }
     }

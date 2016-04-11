@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
